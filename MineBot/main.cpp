@@ -115,10 +115,7 @@ void dig(int ile){
     }
 
 int main(){
-    Sleep(15000);
-    dig(2100000);
-    system("shutdown -s");
-    /*askQuestions();
+    askQuestions();
     Sleep(7000);
 	hold("1", 1);
     for(int i = 2; i<10; i++){
@@ -154,5 +151,4 @@ int main(){
     if(wylaczyc == 't'){
         system("shutdown -s");
     }
-    */
 }
