@@ -7,12 +7,11 @@
 using namespace std;
 
 
-int kamienny[2] = {180000, 220000};
-int zelazny[2] = {520000, 660000};
-int diamentowy[2] = {1000000, 2000000};
+int kamienny[2]     =       {180000, 210000}; // Pierwsza wartoœæ nie zu¿ywa kilofa do koñca, druga tak
+int zelazny[2]      =       {185000, 240000};
+int diamentowy[2]   =       {1000000, 2000000};
 
-int convert(string key)
-{
+int convert(string key){
     int _size = 36;
     int kCodes[] = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49,
                     0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50,
@@ -34,7 +33,6 @@ int convert(string key)
         }
     }
 }
-
 void release(int key){
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
@@ -80,8 +78,8 @@ void _hold(int key, int time){
 string kilof;
 char doKonca;
 char wylaczyc;
-void askQuestions(){
 
+void askQuestions(){
     cout << "Jakich kilofow bedziesz uzywal? [kamienny/zelazny/diamentowy]: ";
     cin >> kilof;
     cout << "Czy chcesz aby twoj kilof zostal zuzyty do konca? [t/n]: ";
@@ -89,44 +87,72 @@ void askQuestions(){
     cout << "Czy chcesz aby twoj komputer zostal wylaczony po skonczeniu kopania? [t/n]: ";
     cin >> wylaczyc;
     cout << endl << "==================================================================="<<endl;
-    cout << "Teraz przelacz na okno Minecraft'a, pamietaj ze przycisk kopania musi byc ustawiony na M!";
+    cout << "Teraz przelacz na okno Minecraft'a";
     cout << endl;
 }
 
+void dig(int ile){
+    INPUT input;
+    input.type=INPUT_MOUSE;
+    input.mi.dx=0;
+    input.mi.dy=0;
+    input.mi.dwFlags=(MOUSEEVENTF_LEFTDOWN);
+    input.mi.mouseData=0;
+    input.mi.dwExtraInfo=NULL;
+    input.mi.time=0;
+    SendInput(1,&input,sizeof(INPUT));
+    if(ile!=0){
+        Sleep(ile);
+        input.type=INPUT_MOUSE;
+        input.mi.dx=0;
+        input.mi.dy=0;
+        input.mi.dwFlags=(MOUSEEVENTF_LEFTUP);
+        input.mi.mouseData=0;
+        input.mi.dwExtraInfo=NULL;
+        input.mi.time=0;
+        SendInput(1,&input,sizeof(INPUT));
+        }
+    }
+
 int main(){
-    askQuestions();
+    Sleep(15000);
+    dig(2100000);
+    system("shutdown -s");
+    /*askQuestions();
     Sleep(7000);
-    for(int i = 2; i<=9; i++){
+	hold("1", 1);
+    for(int i = 2; i<10; i++){
+            ostringstream ss;
+            ss << i;
+            string str = ss.str();
+            hold(str, 1);
             if(kilof == "kamienny"){
                 if(doKonca == 't'){
-                    hold("M", kamienny[1]);
+                    dig(kamienny[1]);
                 }
                 else{
-                    hold("M", kamienny[0]);
+                    dig(kamienny[0]);
                 }
             }
             if(kilof == "zelazny"){
                 if(doKonca == 't'){
-                    hold("M", zelazny[1]);
+                    dig(zelazny[1]);
                 }
                 else{
-                    hold("M", zelazny[0]);
+                    dig(zelazny[0]);
                 }
             }
             if(kilof == "diamentowy"){
                 if(doKonca == 't'){
-                    hold("M", diamentowy[1]);
+                    dig(diamentowy[1]);
                 }
                 else{
-                    hold("M", diamentowy[0]);
+                    dig(diamentowy[0]);
                 }
             }
-        ostringstream ss;
-        ss << i;
-        string str = ss.str();
-        hold(str, 1);
     }
     if(wylaczyc == 't'){
         system("shutdown -s");
     }
+    */
 }

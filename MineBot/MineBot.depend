@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1462829728 source:d:\projekty\minebot\minebot\main.cpp
+	<windows.h>
+	<string>
+	<iostream>
+	<fstream>
+	<sstream>
+
